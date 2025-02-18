@@ -12,10 +12,10 @@
 	String deptno = request.getParameter("deptno"); 
 	String dname = request.getParameter("dname");
 	String loc = request.getParameter("loc");
-	String sql = "insert into dept values(?,?,?);";
+	String sql = "select * from dept;";
 	
 	String url = "jdbc:mysql://localhost:3306/spring5fs";
-	Connection conn = null;	PreparedStatement pstmt = null;
+	Connection conn = null;	PreparedStatement pstmt = null; ResultSet rs;
 	
 	try {
 		Class.forName("com.mysql.jdbc.Driver");
@@ -26,11 +26,17 @@
 			out.println("mysql 성공<br>");
 		}
 		pstmt = conn.prepareStatement(sql);
-		pstmt.setString(1, deptno);
-		pstmt.setString(2, dname);
-		pstmt.setString(3, loc);
-		out.println("추가 완료");
-		pstmt.executeUpdate();
+		rs = pstmt.executeQuery();
+		out.println("<table border='1'>");
+		out.println("<tr><td>DEPTNO</td><td>DNAME</td><td>LOC</td></tr>");
+		while(rs.next()){
+			out.println("<tr>");
+			out.println("<td>"+rs.getString("deptno")+"</td>");
+			out.println("<td>"+rs.getString("dname")+"</td>");
+			out.println("<td>"+rs.getString("loc")+"</td>");
+			out.println("</tr>");
+		}
+		out.println("</table>");
 	} catch (Exception e) {
 		e.printStackTrace();
 	} finally {
@@ -38,8 +44,5 @@
 		try { if(conn != null){ conn.close();} } catch(Exception e){ e.printStackTrace(); };
 	}
 %>
-<form action="result_select">
-	<input type="submit" value="결과 보러가기" />
-</form>
 </body>
 </html>
