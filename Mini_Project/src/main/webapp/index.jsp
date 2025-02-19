@@ -1,3 +1,4 @@
+<%@ page import="java.sql.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -12,28 +13,27 @@
 <body>
 	<div>
 		<jsp:include page="header.jsp"></jsp:include>
-		
 		<%-- Categories --%>
 		<div class="categories my-5">
 			<div class="small-container">
 				<div class="row">
 					<div class="col-3">
 						<a href="./goods1.jsp">
-							<img src="https://picsum.photos/250/250">
+							<img src="https://dummyimage.com/250x250/555/fff.jpg">
 							<h6>상품 1 입니다</h6>
 							<p>상품 1 가격</p>
 						</a>
 					</div>
 					<div class="col-3">
 						<a href="./goods2.jsp">
-							<img src="https://picsum.photos/250/250">
+							<img src="https://dummyimage.com/250x250/555/fff.jpg">
 							<h6>상품 2 입니다</h6>
 							<p>상품 2 가격</p>
 						</a>
 					</div>
 					<div class="col-3">
 						<a href="./goods3.jsp">
-							<img src="https://picsum.photos/250/250">
+							<img src="https://dummyimage.com/250x250/555/fff.jpg">
 							<h6>상품 3 입니다</h6>
 							<p>상품 3 가격</p>
 						</a>
