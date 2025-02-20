@@ -1,0 +1,68 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page import="java.sql.*" %>
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="css/style.css" type="text/css">
+</head>
+<body>
+	<div>
+		<jsp:include page="Header.jsp"></jsp:include>
+		<%
+			Connection conn = null;	PreparedStatement pstmt = null; ResultSet rs = null;
+			String goods_no = request.getParameter("goods_no");
+			try {
+				Class.forName("com.mysql.cj.jdbc.Driver");
+				String url = "jdbc:mysql://localhost:3306/spring5fs";
+				conn = DriverManager.getConnection(url, "root", "1234");
+				
+				String sql = "select * from goods where goods_no=?";
+				
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, goods_no);
+				rs = pstmt.executeQuery();
+				
+				if(rs.next()){
+		%>
+		<form action="CartForm.jsp">
+	        <section class="py-5">
+	            <div class="container px-4 px-lg-5 my-5">
+	                <div class="row gx-4 gx-lg-5 align-items-center">
+	                    <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="https://dummyimage.com/600x700/dee2e6/6c757d.jpg" alt="..." /></div>
+	                    <div class="col-md-6">
+                            <div class="small mb-1">상품번호 : <%=rs.getString("goods_no") %></div>
+	                        <h1 class="display-5 fw-bolder"><%= rs.getString("goods_name") %></h1>
+	                        <div class="fs-5 mb-5">
+	                            <span><%=rs.getInt("goods_price") %></span>
+	                        </div>
+	                        <p class="lead"><%=rs.getString("goods_content") %></p>
+	                        <div class="d-flex">
+	                            <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" />
+	                            <input class="btn btn-outline-dark flex-shrink-0" type="submit" value="장바구니에 추가"/>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+	        </section>
+	        <input type="hidden" name="goods_no" value="<%=rs.getString("goods_no") %>"/>
+     	    <input type="hidden" name="goods_name" value="<%=rs.getString("goods_name") %>"/>
+     	    <input type="hidden" name="goods_price" value="<%=rs.getString("goods_price") %>"/>
+        </form>
+ 		<%
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally{
+				try { if (rs != null) { rs.close(); } } catch (Exception e) { e.printStackTrace(); }
+				try { if (pstmt != null) { pstmt.close(); } } catch (Exception e) { e.printStackTrace(); }
+				try { if (conn != null) { conn.close(); } } catch (Exception e) { e.printStackTrace(); }
+			}
+		%>
+		<jsp:include page="Footer.jsp"></jsp:include>
+	</div>
+</body>
+</html>

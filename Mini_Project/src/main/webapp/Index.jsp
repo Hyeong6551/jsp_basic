@@ -12,32 +12,42 @@
 </head>
 <body>
 	<div>
-		<jsp:include page="Header.jsp"></jsp:include>
+	<jsp:include page="Header.jsp"></jsp:include>
 		<%-- Categories --%>
 		<div class="categories my-5">
 			<div class="small-container">
 				<div class="row">
-					<div class="col-3">
-						<a href="./Goods1.jsp">
-							<img src="https://dummyimage.com/250x250/555/fff.jpg">
-							<h6>상품 1 입니다</h6>
-							<p>상품 1 가격</p>
-						</a>
-					</div>
-					<div class="col-3">
-						<a href="./goods2.jsp">
-							<img src="https://dummyimage.com/250x250/555/fff.jpg">
-							<h6>상품 2 입니다</h6>
-							<p>상품 2 가격</p>
-						</a>
-					</div>
-					<div class="col-3">
-						<a href="./goods3.jsp">
-							<img src="https://dummyimage.com/250x250/555/fff.jpg">
-							<h6>상품 3 입니다</h6>
-							<p>상품 3 가격</p>
-						</a>
-					</div>
+<%
+	Connection conn = null; PreparedStatement pstmt = null; ResultSet rs = null;
+
+	try {
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		String url = "jdbc:mysql://localhost:3306/spring5fs";
+		conn = DriverManager.getConnection(url, "root","1234");
+		
+		String sql = "SELECT * FROM goods";
+		
+		pstmt = conn.prepareStatement(sql);
+		rs = pstmt.executeQuery();
+		while(rs.next()){
+%>
+		<div class="col-3">
+			<a href="./Goods.jsp?goods_no=<%=rs.getInt("goods_no") %>">
+				<img src="https://dummyimage.com/250x250/555/fff.jpg">
+				<h6><%=rs.getString("goods_name") %></h6>
+				<p><%=rs.getInt("goods_price") %></p>
+			</a>
+		</div>
+<%	
+		}
+	} catch (Exception e){
+		e.printStackTrace();
+	} finally {
+		try { if (rs != null) { rs.close(); } } catch (Exception e) { e.printStackTrace(); }
+		try { if (pstmt != null) { pstmt.close(); } } catch (Exception e) { e.printStackTrace(); }
+		try { if (conn != null) { conn.close(); } } catch (Exception e) { e.printStackTrace(); }
+	}
+%>
 				</div>
 			</div>
 		</div> <%-- Categories end --%>

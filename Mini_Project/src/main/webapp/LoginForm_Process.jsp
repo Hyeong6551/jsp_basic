@@ -2,10 +2,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
+	Connection conn = null; PreparedStatement pstmt = null; ResultSet rs = null;
+	
 	String user_id = request.getParameter("user_id");
 	String user_password = request.getParameter("user_password");
 	
-	Connection conn = null; PreparedStatement pstmt = null; ResultSet rs = null;
+	// 아이디 비밀번호 체크
+	String id_check=""; 
+	String password_check="";
 	
 	try{
 		Class.forName("com.mysql.cj.jdbc.Driver");
@@ -17,8 +21,12 @@
 		pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, user_id);
 		rs = pstmt.executeQuery();
-		
 		if(rs.next()){
+			id_check = rs.getString("user_id");
+			password_check = rs.getString("user_password");
+		}
+		
+		if(id_check.equals(user_id) && password_check.equals(user_password)){
 			session.setAttribute("user_id", user_id);
 			session.setAttribute("user_password", user_password);
 			response.sendRedirect("Index.jsp");

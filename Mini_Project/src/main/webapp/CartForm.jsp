@@ -7,7 +7,7 @@
 <title>장바구니 목록</title>
 </head>
 <body>
-s<jsp:include page="Header.jsp"></jsp:include>
+<jsp:include page="Header.jsp"></jsp:include>
 <section class="h-100">
   <div class="container h-100 py-5">
     <div class="row d-flex justify-content-center align-items-center h-100">
@@ -29,19 +29,8 @@ s<jsp:include page="Header.jsp"></jsp:include>
                 <p class="lead fw-normal mb-2">상품명</p>
               </div>
               <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
-               <p class="lead fw-normal mb-2">개수</p>
-                <button class="btn btn-link px-2"
-                  onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
-                  <i class="fas fa-minus"></i>
-                </button>
-
                 <input id="form1" min="0" name="quantity" value="2" type="number"
                   class="form-control form-control-sm" />
-
-                <button class="btn btn-link px-2"
-                  onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
-                  <i class="fas fa-plus"></i>
-                </button>
               </div>
               <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
                 <h5 class="mb-0">$499.00</h5>
