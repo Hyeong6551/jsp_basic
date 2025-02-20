@@ -9,9 +9,9 @@
 <link rel="stylesheet" href="css/logRg.css" type="text/css">
 </head>
 <body>
-	<jsp:include page="header.jsp"></jsp:include>
+	<jsp:include page="Header.jsp"></jsp:include>
 	
-	<form action="registerForm_success.jsp">
+	<form action="RegisterForm_success.jsp">
 		<div class="register-container my-4">
 			<div class="mb-3 mt-3">
 			  <label for="id" class="form-label">아이디</label>
@@ -39,6 +39,6 @@
 		</div>
 	</form>
 	
-	<jsp:include page="footer.jsp"></jsp:include>
+	<jsp:include page="Footer.jsp"></jsp:include>
 </body>
 </html>
