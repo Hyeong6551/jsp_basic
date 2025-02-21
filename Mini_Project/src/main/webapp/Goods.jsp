@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.sql.*" %>
-
+<jsp:include page="dbConnection.jsp" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,24 +11,20 @@
 </head>
 <body>
 	<div>
-		<jsp:include page="Header.jsp"></jsp:include>
+	<jsp:include page="Header.jsp" />
 		<%
-			Connection conn = null;	PreparedStatement pstmt = null; ResultSet rs = null;
+			Connection conn = (Connection)session.getAttribute("conn");
+			PreparedStatement pstmt = null; ResultSet rs = null;
+			
 			String goods_no = request.getParameter("goods_no");
-			try {
-				Class.forName("com.mysql.cj.jdbc.Driver");
-				String url = "jdbc:mysql://localhost:3306/spring5fs";
-				conn = DriverManager.getConnection(url, "root", "1234");
-				
-				String sql = "select * from goods where goods_no=?";
-				
+			String sql = "select * from goods where goods_no=?";
+			try {			
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setString(1, goods_no);
 				rs = pstmt.executeQuery();
-				
 				if(rs.next()){
 		%>
-		<form action="CartForm.jsp">
+		<form action="Cart_Process.jsp">
 	        <section class="py-5">
 	            <div class="container px-4 px-lg-5 my-5">
 	                <div class="row gx-4 gx-lg-5 align-items-center">
@@ -41,7 +37,7 @@
 	                        </div>
 	                        <p class="lead"><%=rs.getString("goods_content") %></p>
 	                        <div class="d-flex">
-	                            <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" />
+	                            <input class="form-control text-center me-3" name="goods_quantity" type="num" value="1" style="max-width: 3rem" />
 	                            <input class="btn btn-outline-dark flex-shrink-0" type="submit" value="장바구니에 추가"/>
 	                        </div>
 	                    </div>
@@ -49,8 +45,6 @@
 	            </div>
 	        </section>
 	        <input type="hidden" name="goods_no" value="<%=rs.getString("goods_no") %>"/>
-     	    <input type="hidden" name="goods_name" value="<%=rs.getString("goods_name") %>"/>
-     	    <input type="hidden" name="goods_price" value="<%=rs.getString("goods_price") %>"/>
         </form>
  		<%
 				}
@@ -62,7 +56,7 @@
 				try { if (conn != null) { conn.close(); } } catch (Exception e) { e.printStackTrace(); }
 			}
 		%>
-		<jsp:include page="Footer.jsp"></jsp:include>
+		<jsp:include page="Footer.jsp" />
 	</div>
 </body>
 </html>

@@ -1,6 +1,7 @@
 <%@ page import="java.sql.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<jsp:include page="dbConnection.jsp" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,21 +13,16 @@
 </head>
 <body>
 	<div>
-	<jsp:include page="Header.jsp"></jsp:include>
+	<jsp:include page="Header.jsp" />
 		<%-- Categories --%>
 		<div class="categories my-5">
 			<div class="small-container">
 				<div class="row">
 <%
-	Connection conn = null; PreparedStatement pstmt = null; ResultSet rs = null;
-
-	try {
-		Class.forName("com.mysql.cj.jdbc.Driver");
-		String url = "jdbc:mysql://localhost:3306/spring5fs";
-		conn = DriverManager.getConnection(url, "root","1234");
-		
-		String sql = "SELECT * FROM goods";
-		
+	Connection conn = (Connection)session.getAttribute("conn");
+	PreparedStatement pstmt = null; ResultSet rs = null;
+	String sql = "SELECT * FROM goods";
+	try {		
 		pstmt = conn.prepareStatement(sql);
 		rs = pstmt.executeQuery();
 		while(rs.next()){
@@ -51,8 +47,7 @@
 				</div>
 			</div>
 		</div> <%-- Categories end --%>
-		<jsp:include page="Footer.jsp"></jsp:include>
-
+		<jsp:include page="Footer.jsp" />
 	</div>
 </body>
 </html>

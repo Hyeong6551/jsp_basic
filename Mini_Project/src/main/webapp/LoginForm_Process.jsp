@@ -1,8 +1,10 @@
 <%@page import="java.sql.*"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<jsp:include page="dbConnection.jsp" />
 <%
-	Connection conn = null; PreparedStatement pstmt = null; ResultSet rs = null;
+	PreparedStatement pstmt = null; ResultSet rs = null;
+	
+	Connection conn = (Connection)session.getAttribute("conn");
+	String sql = "SELECT * FROM users where user_id=?";
 	
 	String user_id = request.getParameter("user_id");
 	String user_password = request.getParameter("user_password");
@@ -10,14 +12,8 @@
 	// 아이디 비밀번호 체크
 	String id_check=""; 
 	String password_check="";
-	
+
 	try{
-		Class.forName("com.mysql.cj.jdbc.Driver");
-		String url = "jdbc:mysql://localhost:3306/spring5fs";
-		conn = DriverManager.getConnection(url, "root","1234");
-		
-		String sql = "SELECT * FROM users where user_id=?";
-		
 		pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, user_id);
 		rs = pstmt.executeQuery();
@@ -36,6 +32,8 @@
 	}catch (Exception e){
 		e.printStackTrace();
 	}finally{
-		
+		try { if (rs != null) { rs.close(); } } catch (Exception e) { e.printStackTrace(); }
+		try { if (pstmt != null) { pstmt.close(); } } catch (Exception e) { e.printStackTrace(); }
+		try { if (conn != null) { conn.close(); } } catch (Exception e) { e.printStackTrace(); }
 	}
 %>

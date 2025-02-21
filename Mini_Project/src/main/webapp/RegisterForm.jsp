@@ -59,8 +59,7 @@
 </script>
 </head>
 <body>
-	<jsp:include page="Header.jsp"></jsp:include>
-	
+	<jsp:include page="Header.jsp"/>
 	<form action="RegisterForm_Process.jsp">
 		<div class="register-container my-4">
 			<div class="mb-3 mt-3">
@@ -92,7 +91,6 @@
 			<button type="submit" class="btn btn-primary mt-5">회원가입</button>
 		</div>
 	</form>
-	
-	<jsp:include page="Footer.jsp"></jsp:include>
+	<jsp:include page="Footer.jsp"/>
 </body>
 </html>

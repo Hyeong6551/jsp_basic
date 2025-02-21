@@ -1,8 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
 <%@ page import="java.sql.*" %>
-<!DOCTYPE html>
-
+<jsp:include page="dbConnection.jsp" />
 <%  
 	String user_name = request.getParameter("user_name");
 	String user_id = request.getParameter("user_id");
@@ -13,8 +10,9 @@
 	String user_postcode = request.getParameter("postcode");
 	
 	user_address = user_address + " " + detailAddress;
-			
-	Connection conn = null;	PreparedStatement pstmt = null;
+	
+	Connection conn = (Connection)session.getAttribute("conn");		
+	PreparedStatement pstmt = null;
 	
 	if(user_name != null && user_id != null && user_password !=null && user_address != null){
 		try {

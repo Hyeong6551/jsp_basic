@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="css/logRg.css" type="text/css">
 </head>
 <body>
-	<jsp:include page="Header.jsp"></jsp:include>
+	<jsp:include page="Header.jsp"/>
 	<form action="LoginForm_Process.jsp" method="post">
 		<div class="register-container my-4">
 			<div class="mb-3 mt-3">
@@ -25,6 +25,6 @@
 			</div>
 		</div>
 	</form>
-	<jsp:include page="Footer.jsp"></jsp:include>
+	<jsp:include page="Footer.jsp"/>
 </body>
 </html>

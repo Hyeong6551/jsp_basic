@@ -1,5 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%	
+	String loginCheck = (String) session.getAttribute("user_id");
+	if(loginCheck == null){
+		%>
+		<script>
+			alert("로그인을 해주세요")
+			window.location.href = "LoginForm.jsp"; 
+		</script>
+		<%
+	}
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,7 +18,7 @@
 <title>장바구니 목록</title>
 </head>
 <body>
-	<jsp:include page="Header.jsp"></jsp:include>
+	<jsp:include page="Header.jsp"/>
 <section class="h-100">
   <div class="container h-100 py-5">
     <div class="row d-flex justify-content-center align-items-center h-100">
@@ -56,6 +67,6 @@
     </div>
   </div>
 </section>
-  		<jsp:include page="Footer.jsp"></jsp:include>
+  		<jsp:include page="Footer.jsp"/>
 </body>
 </html>
