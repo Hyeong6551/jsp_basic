@@ -6,6 +6,9 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 <body>
+<%
+	String user_id = (String)session.getAttribute("user_id");
+%>
 	<%-- Header --%>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container px-4 px-lg-5">
@@ -13,10 +16,18 @@
             <div class="collapse navbar-collapse">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
                     <li class="nav-item"><a class="nav-link active" aria-current="page" href="CartForm.jsp">장바구니</a></li>
-                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="OrderForm.jsp">주문 목록</a></li>
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="OrderForm.jsp">주문목록</a></li>
+                    <%
+                    // 트러블 슈팅 user_id.equals("admin") 으로 하니 안되고 
+                    // 아래와 같이 코드를 바꾸니까 실행됨
+                    if("admin".equals(user_id)){
+                    	%>
+                    	   <li class="nav-item"><a class="nav-link active" aria-current="page" href="GoodsList.jsp">상품추가</a></li>
+                    	<%
+                    } else {}
+                    %>
                 </ul>
                 <%
-            	String user_id = (String)session.getAttribute("user_id");
             	if(user_id == null){
             	%>
      	        <form class="d-flex">

@@ -41,5 +41,6 @@
 	} finally {
 	    if(pstmt != null) try { pstmt.close(); } catch(Exception e) {}
 	    if(conn != null) try { conn.close(); } catch(Exception e) {}
+	    response.sendRedirect("fileList.jsp");
 	}
 %>

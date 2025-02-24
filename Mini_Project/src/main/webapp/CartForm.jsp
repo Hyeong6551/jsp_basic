@@ -42,8 +42,9 @@
 	                <p class="lead fw-normal mb-2"><%=rs.getString("goods_name") %></p>
 	              </div>
 	              <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
+	              	<h6 class="lead fw-normal mb-2 px-2">수량</h6	>
 	                <input id="form1" min="0" name="quantity" value="<%=rs.getInt("cart_goods_quantity") %>" type="text"
-	                  class="form-control form-control-sm" size=5 readonly="readonly">
+	                  class="form-control form-control-sm" style="max-width: 3rem; text-align: center" size=5 readonly="readonly">
 	              </div>
 	              <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
 	                <h5 class="mb-0"><%=rs.getInt("goods_price")*rs.getInt("cart_goods_quantity") %></h5> <!-- input 수량이 늘어나면 가격 변동 -->
