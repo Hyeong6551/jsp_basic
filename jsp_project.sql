@@ -2,7 +2,7 @@ CREATE TABLE `cart` (
   `cart_no` integer PRIMARY KEY,
   `cart_user_no` varchar(30),
   `cart_goods_no` varchar(150),
-  `cart_goods_amount` integer
+  `cart_goods_quantity` integer
 );
 
 CREATE TABLE `users` (

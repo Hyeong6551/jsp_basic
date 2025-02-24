@@ -60,7 +60,7 @@
 </head>
 <body>
 	<jsp:include page="Header.jsp"/>
-	<form action="RegisterForm_Process.jsp">
+	<form action="RegisterForm_Process.jsp" method="post">
 		<div class="register-container my-4">
 			<div class="mb-3 mt-3">
 			  <label for="id" class="form-label">아이디</label>
