@@ -30,8 +30,8 @@
 		<div class="col-3">
 			<a href="./Goods.jsp?goods_no=<%=rs.getInt("goods_no") %>">
 				<img src="<%=rs.getString("goods_image") %>">
-				<h6><%=rs.getString("goods_name") %></h6>	
-				<p><%=rs.getInt("goods_price") %></p>
+				<h6> <%=rs.getString("goods_name") %></h6>	
+				<p><%=rs.getInt("goods_price") %> ₩</p>
 			</a>
 		</div>
 <%	

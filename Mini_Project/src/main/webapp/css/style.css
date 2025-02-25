@@ -23,7 +23,9 @@
     text-align: center
 }
 .col-3 img{
-	width: 100%;
+/* 	width: 100%; */
+	width: 250px;
+	height: 250px;
 }
 .col-3 a{
 	text-decoration-line: none;
@@ -31,4 +33,10 @@
 }
 a * {
 	margin-bottom:7px;
+}
+
+/* goods  */
+.card-img-top {
+    height: 700px !important;
+    max-width: 500px !important;
 }
