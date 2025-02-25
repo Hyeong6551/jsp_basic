@@ -18,7 +18,7 @@
 		
 			Connection conn = (Connection)session.getAttribute("conn");
 			PreparedStatement pstmt = null; ResultSet rs = null;
-			
+			 
 			String goods_no = request.getParameter("goods_no");
 			String sql = "select * from goods where goods_no=?";
 			try {			

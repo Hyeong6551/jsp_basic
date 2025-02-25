@@ -9,7 +9,7 @@ if (goods_no == null || goods_no.trim().equals("")) {
     response.sendRedirect("fileList.jsp");
     return;
 }
-String uploadPath = "image/";
+String uploadPath = "image/"; 
 
 Connection conn = (Connection)session.getAttribute("conn");
 PreparedStatement pstmt = null;

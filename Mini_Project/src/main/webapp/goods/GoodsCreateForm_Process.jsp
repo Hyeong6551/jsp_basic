@@ -20,7 +20,7 @@
 	Connection conn = (Connection)session.getAttribute("conn");
 	PreparedStatement pstmt = null;
 	
-	try {
+	try { 
 	    String sql = "INSERT INTO goods (goods_no,goods_image, goods_name, goods_price, goods_content)"+
 	            " VALUES (NULL, ?, ?, ?, ?)";
 	    pstmt = conn.prepareStatement(sql);

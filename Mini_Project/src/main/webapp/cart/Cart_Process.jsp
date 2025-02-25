@@ -2,7 +2,7 @@
 <%@ page import="java.sql.*" %>
 <jsp:include page="../dbConnection.jsp" />
 <%
-	Connection conn = (Connection)session.getAttribute("conn");
+	Connection conn = (Connection)session.getAttribute("conn"); 
 
 	// cart_no가 중복되지 않기 위해 select
 	PreparedStatement pstmt = null;

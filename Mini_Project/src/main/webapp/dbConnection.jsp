@@ -4,7 +4,7 @@
 	
 	String url = "jdbc:mysql://localhost:3306/spring5fs";
 	String db_name = "root";
-	String db_password = "1234";
+	String db_password = "1234"; 
 	
 	try {
 		Class.forName("com.mysql.cj.jdbc.Driver");
