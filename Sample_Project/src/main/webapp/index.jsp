@@ -20,7 +20,7 @@
 
             <ul id="gnb">
                 <li><a href="#">DEPARTMENT</a></li>
-                <li><a href="#">GALLERY</a></li>ㅋ
+                <li><a href="#">GALLERY</a></li>
                 <li><a href="#">YOUTUBE</a></li>
                 <li><a href="#">COMMUNITY</a></li>
                 <li><a href="#">LOCATION</a></li>
@@ -37,7 +37,13 @@
                 <% 
                 	} else { 
                 %>
-                    <li><a href="login/login_main.jsp">Login</a></li>
+                <form action="login.jsp" method="post">
+                <div class="login">
+		          아이디:  <input type="text"     name="id">
+		          비밀번호: <input type="password" name="pw">
+		          <input type="submit" value="로그인">
+	          	</div>
+                </form>
                 <%
                 	}
                 %> 

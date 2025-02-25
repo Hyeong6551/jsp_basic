@@ -31,7 +31,7 @@
             	if(user_id == null){
             	%>
      	        <form class="d-flex">
-                    <a class="btn btn-outline-dark me-2"  href="/login/LoginForm.jsp">로그인</a>
+                    <a class="btn btn-outline-dark me-2"  href="${pageContext.request.contextPath}/login/LoginForm.jsp">로그인</a>
                     <a class="btn btn-outline-dark me-2"  href="${pageContext.request.contextPath}/login/RegisterForm.jsp">회원가입</a>
                 </form>
             	<%

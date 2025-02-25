@@ -3,30 +3,30 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.sql.*" %>
 <jsp:include page="../dbConnection.jsp" />
+<%
+	DecimalFormat df = new DecimalFormat("###,###");
+
+	Connection conn = (Connection)session.getAttribute("conn");
+	PreparedStatement pstmt = null; ResultSet rs = null;
+	 
+	String goods_no = request.getParameter("goods_no");
+	String sql = "select * from goods where goods_no=?";
+	try {			
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, goods_no);
+		rs = pstmt.executeQuery();
+		if(rs.next()){
+%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title><%= rs.getString("goods_name") %> 상품 페이지</title>
 <link rel="stylesheet" href="../css/style.css" type="text/css">
 </head>
 <body>
 	<div>
 	<jsp:include page="../Header.jsp" />
-		<%
-			DecimalFormat df = new DecimalFormat("###,###");
-		
-			Connection conn = (Connection)session.getAttribute("conn");
-			PreparedStatement pstmt = null; ResultSet rs = null;
-			 
-			String goods_no = request.getParameter("goods_no");
-			String sql = "select * from goods where goods_no=?";
-			try {			
-				pstmt = conn.prepareStatement(sql);
-				pstmt.setString(1, goods_no);
-				rs = pstmt.executeQuery();
-				if(rs.next()){
-		%>
 		<form action="Cart_Process.jsp">
 	        <section class="py-5">
 	            <div class="container px-4 px-lg-5 my-5">
@@ -39,7 +39,7 @@
 	                        <div class="fs-5 mb-5">
 	                            <span><%=df.format(rs.getInt("goods_price")) %> ₩</span>
 	                        </div>
-	                        <div style="width: 300px">
+	                        <div class="small mb-1"">
 	                        	<p class="lead"><%=rs.getString("goods_content") %></p>
 	                        </div>
 	                        <div class="d-flex">
