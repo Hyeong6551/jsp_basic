@@ -1,5 +1,5 @@
 <%@ page import="java.sql.*" %>
-<jsp:include page="dbConnection.jsp" />
+<jsp:include page="../dbConnection.jsp" />
 <%  
 	String user_name = request.getParameter("user_name");
 	String user_id = request.getParameter("user_id");

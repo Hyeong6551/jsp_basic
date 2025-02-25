@@ -5,8 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>회원가입 페이지</title>
-<link rel="stylesheet" href="css/style.css" type="text/css">
-<link rel="stylesheet" href="css/logRg.css" type="text/css">
+<link rel="stylesheet" href="../css/style.css" type="text/css">
+<link rel="stylesheet" href="../css/logRg.css" type="text/css">
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
     function sample6_execDaumPostcode() {
@@ -59,7 +59,7 @@
 </script>
 </head>
 <body>
-	<jsp:include page="Header.jsp"/>
+	<jsp:include page="../Header.jsp"/>
 	<form action="RegisterForm_Process.jsp" method="post">
 		<div class="register-container my-4">
 			<div class="mb-3 mt-3">
@@ -91,6 +91,6 @@
 			<button type="submit" class="btn btn-primary mt-5">회원가입</button>
 		</div>
 	</form>
-	<jsp:include page="Footer.jsp"/>
+	<jsp:include page="../Footer.jsp"/>
 </body>
 </html>

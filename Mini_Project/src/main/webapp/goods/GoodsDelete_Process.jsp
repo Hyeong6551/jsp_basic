@@ -2,7 +2,7 @@
 <%@page import="java.sql.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<jsp:include page="dbConnection.jsp" />
+<jsp:include page="../dbConnection.jsp" />
 <%
 String goods_no = request.getParameter("goods_no");
 if (goods_no == null || goods_no.trim().equals("")) {

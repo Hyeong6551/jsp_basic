@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="css/logRg.css" type="text/css">
 </head>
 <body>
-	<jsp:include page="Header.jsp" />
+	<jsp:include page="../Header.jsp" />
 	
 	<div class="container">
 		<form action="GoodsCreateForm_Process.jsp" method="post" enctype="multipart/form-data">
@@ -34,6 +34,6 @@
 		</form>
 	</div>
 	
-	<jsp:include page="Footer.jsp" />
+	<jsp:include page="../Footer.jsp" />
 </body>
 </html>

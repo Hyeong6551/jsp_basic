@@ -1,6 +1,6 @@
 <%@page import="java.util.*"%>
 <%@ page import="java.sql.*" %>
-<jsp:include page="dbConnection.jsp" />
+<jsp:include page="../dbConnection.jsp" />
 <%
 	Connection conn = (Connection)session.getAttribute("conn");
 

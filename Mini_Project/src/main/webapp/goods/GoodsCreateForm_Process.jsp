@@ -3,7 +3,7 @@
 <%@page import="java.sql.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<jsp:include page="dbConnection.jsp" />
+<jsp:include page="../dbConnection.jsp" />
 <%
 	String uploadPath = application.getRealPath("/image");
 	int maxSize = 10 * 1024 * 1024;

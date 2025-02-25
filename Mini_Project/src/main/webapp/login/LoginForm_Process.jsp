@@ -1,5 +1,5 @@
 <%@page import="java.sql.*"%>
-<jsp:include page="dbConnection.jsp" />
+<jsp:include page="../dbConnection.jsp" />
 <%
 	PreparedStatement pstmt = null; ResultSet rs = null;
 	
@@ -25,7 +25,7 @@
 		if(id_check.equals(user_id) && password_check.equals(user_password)){
 			session.setAttribute("user_id", user_id);
 			session.setAttribute("user_password", user_password);
-			response.sendRedirect("Index.jsp");
+			response.sendRedirect("../Index.jsp");
 		} else {
 			response.sendRedirect("LoginForm.jsp");
 		}

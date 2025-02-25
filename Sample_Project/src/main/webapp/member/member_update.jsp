@@ -39,6 +39,6 @@ Class.forName("com.mysql.cj.jdbc.Driver");
     opener.location.reload(true);  // 사용자 이름이 바뀌었으면 바로 반영
     window.close();
 </script>
-
+<% response.sendRedirect("../index.jsp"); %>
 </body>
 </html>

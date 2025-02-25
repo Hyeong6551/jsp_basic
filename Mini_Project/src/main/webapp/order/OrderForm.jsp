@@ -6,7 +6,7 @@
 		%>
 		<script>
 			alert("로그인을 해주세요")
-			window.location.href = "LoginForm.jsp"; 
+			window.location.href = "../login/LoginForm.jsp"; 
 		</script>
 		<%
 	}
@@ -18,7 +18,7 @@
 <title>장바구니 목록</title>
 </head>
 <body>
-	<jsp:include page="Header.jsp"/>
+	<jsp:include page="../Header.jsp"/>
 <section class="h-100">
   <div class="container h-100 py-5">
     <div class="row d-flex justify-content-center align-items-center h-100">
@@ -67,6 +67,6 @@
     </div>
   </div>
 </section>
-  		<jsp:include page="Footer.jsp"/>
+  		<jsp:include page="../Footer.jsp"/>
 </body>
 </html>

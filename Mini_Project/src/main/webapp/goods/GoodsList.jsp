@@ -1,7 +1,7 @@
 <%@page import="java.sql.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<jsp:include page="dbConnection.jsp" />
+<jsp:include page="../dbConnection.jsp" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,7 +31,7 @@ function deleteGoods(goods_no) {
 </script>
 </head>
 <body>
-	<jsp:include page="Header.jsp" />
+	<jsp:include page="../Header.jsp" />
 	<div class="container">
     <table border="1">
        <tr>
@@ -74,6 +74,6 @@ function deleteGoods(goods_no) {
 			<a href="GoodsCreateForm.jsp" class="btn btn-primary">상품 추가</a>
 		</div>
 	</div>
-	<jsp:include page="Footer.jsp" />
+	<jsp:include page="../Footer.jsp" />
 </body>
 </html>

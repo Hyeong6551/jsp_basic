@@ -33,6 +33,7 @@
                 	if ((String)session.getAttribute("userId") != null) { 
                 %>  
                 	<li><a href="login/logout.jsp"><%=session.getAttribute("userName") %>님 Logout</a></li>
+     	            <li><a href="member/member_update_form.jsp">Update</a></li>
                 <% 
                 	} else { 
                 %>

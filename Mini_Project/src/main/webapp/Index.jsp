@@ -1,3 +1,4 @@
+<%@page import="java.text.DecimalFormat"%>
 <%@ page import="java.sql.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -19,6 +20,8 @@
 			<div class="small-container">
 				<div class="row">
 <%
+	DecimalFormat df = new DecimalFormat("###,###");
+
 	Connection conn = (Connection)session.getAttribute("conn");
 	PreparedStatement pstmt = null; ResultSet rs = null;
 	String sql = "SELECT * FROM goods";
@@ -28,10 +31,10 @@
 		while(rs.next()){
 %>
 		<div class="col-3">
-			<a href="./Goods.jsp?goods_no=<%=rs.getInt("goods_no") %>">
+			<a href="goods/Goods.jsp?goods_no=<%=rs.getInt("goods_no") %>">
 				<img src="<%=rs.getString("goods_image") %>">
 				<h6> <%=rs.getString("goods_name") %></h6>	
-				<p><%=rs.getInt("goods_price") %> ₩</p>
+				<p><%=df.format(rs.getInt("goods_price")) %> ₩</p>
 			</a>
 		</div>
 <%	
