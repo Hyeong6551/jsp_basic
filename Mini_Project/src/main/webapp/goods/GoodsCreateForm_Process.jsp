@@ -30,7 +30,7 @@
 	    pstmt.setString(4, goods_content);
 	    pstmt.executeUpdate();
 
-	    out.println("<script>alert('상품이 추가되었습니다.'); location.href='fileUpload.jsp';</script>");
+	    out.println("<script>alert('상품이 추가되었습니다.'); location.href='GoodsList.jsp';</script>");
 
 	} catch(Exception e) {
 	    out.println("오류 발생: " + e.getMessage());

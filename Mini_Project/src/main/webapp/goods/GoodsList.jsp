@@ -1,6 +1,17 @@
 <%@page import="java.sql.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%	
+	String loginCheck = (String) session.getAttribute("user_id");
+	if(!("admin".equals(loginCheck))){
+		%>
+		<script>
+			alert("사용 권한이 없습니다.")
+			window.location.href = "${pageContext.request.contextPath}/Index.jsp"; 
+		</script>
+		<%
+	}
+%>
 <jsp:include page="../dbConnection.jsp" /> 
 <!DOCTYPE html>
 <html>
@@ -32,7 +43,7 @@ function deleteGoods(goods_no) {
 </head>
 <body>
 	<jsp:include page="../Header.jsp" />
-	<div class="container">
+	<div class="container my-5">
     <table border="1">
        <tr>
        	   <th>번호</th>
@@ -70,9 +81,7 @@ function deleteGoods(goods_no) {
 	}
 %>
 	</table>
-		<div>
-			<a href="GoodsCreateForm.jsp" class="btn btn-primary">상품 추가</a>
-		</div>
+	<a href="GoodsCreateForm.jsp" class="btn btn-primary mt-4">상품 추가</a>
 	</div>
 	<jsp:include page="../Footer.jsp" />
 </body>

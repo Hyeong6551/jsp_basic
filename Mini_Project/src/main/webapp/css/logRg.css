@@ -1,9 +1,15 @@
 @charset "UTF-8";
-.register-container{
-	max-width: 400px;
-	margin: 0 auto;
+.register-container {
+    text-align: center;
+    width: 400px;
+    margin: 0 auto;
 }
-p{
+.register-container p{
 	font-size:20px;
 	text-align: center;
+}
+#login{
+	display: flex;
+	justify-content:center;
+	margin:0 auto;	
 }

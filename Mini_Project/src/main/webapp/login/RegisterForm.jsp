@@ -61,20 +61,20 @@
 <body>
 	<jsp:include page="../Header.jsp"/>
 	<form action="RegisterForm_Process.jsp" method="post">
-		<div class="register-container my-4">
-			<div class="mb-3 mt-3">
+		<div class="register-container my-5">
+			<div class="mb-4 mt-3" id="rgForm">
 			  <label for="id" class="form-label">아이디</label>
 			  <input type="text" class="form-control" name="user_id">
 			</div>
-			<div class="mb-3">
+			<div class="mb-4" id="rgForm">
 			  <label for="pwd" class="form-label">비밀번호</label>
 			  <input type="password" class="form-control" name="user_password">
 			</div>
-			<div class="mb-3">
+			<div class="mb-4" id="rgForm">
 			  <label for="name" class="form-label">이름</label>
 			  <input type="text" class="form-control" name="user_name">
 			</div>
-			<div class="b-3">
+			<div class="mb-4" id="rgForm">
 				<label for="address" class="form-label">주소</label>
 				<div class="row">
 					<div class="col">	

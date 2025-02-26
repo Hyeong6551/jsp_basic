@@ -10,10 +10,10 @@
 </head>
 <body>
 <jsp:include page="../Header.jsp" />
-<div class="register-container my-2">
-	<p>회원가입이 완료되었습니다</p><br>	
-	<a href="LoginForm.jsp" class="btn btn-secondary">로그인 화면으로 이동</a>
-</div>
+	<div class="register-container my-5">
+		<p>회원가입이 완료되었습니다</p><br>	
+		<a href="LoginForm.jsp" class="btn btn-secondary">로그인 화면으로 이동</a>
+	</div>
 <jsp:include page="../Footer.jsp" />
 </body>
 </html>

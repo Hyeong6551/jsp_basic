@@ -1,35 +1,28 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%	
-	String loginCheck = (String) session.getAttribute("user_id");
-	if(loginCheck == null){
-		%>
-		<script>
-			alert("로그인을 해주세요")
-			window.location.href = "../login/LoginForm.jsp"; 
-		</script>
-		<%
-	}
+<%@ include file="../login/LoginCheck.jsp" %>
+<%
+
 %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>장바구니 목록</title>
+<title><%=loginCheck %> 장바구니 목록</title>
 </head>
 <body>
-	<jsp:include page="../Header.jsp"/>
+<jsp:include page="../Header.jsp"/>
 <section class="h-100">
   <div class="container h-100 py-5">
     <div class="row d-flex justify-content-center align-items-center h-100">
       <div class="col-10">
 
         <div class="d-flex justify-content-between align-items-center mb-4">
-          <h3 class="fw-normal mb-0">내 주문목록</h3>
+          <h3 class="fw-normal mb-0"><%=loginCheck %> 주문목록</h3>
         </div>
 
         <div class="card rounded-3 mb-4">
-          <div class="card-body p-4">
+          <div class="card-bo	dy p-4">
             <div class="row d-flex justify-content-between align-items-center">
               <div class="col-md-2 col-lg-2 col-xl-2">
                 <img

@@ -30,15 +30,17 @@
                 <%
             	if(user_id == null){
             	%>
-     	        <form class="d-flex">
-                    <a class="btn btn-outline-dark me-2"  href="${pageContext.request.contextPath}/login/LoginForm.jsp">로그인</a>
-                    <a class="btn btn-outline-dark me-2"  href="${pageContext.request.contextPath}/login/RegisterForm.jsp">회원가입</a>
+     	        <form class="d-flex ">
+                    <a class="btn btn-outline-dark ms-2"  href="${pageContext.request.contextPath}/login/LoginForm.jsp">로그인</a>
+                    <a class="btn btn-outline-dark ms-2"  href="${pageContext.request.contextPath}/login/RegisterForm.jsp">회원가입</a>
                 </form>
             	<%
             	} else {
             		%>
-            		<p class="mx-2"><%=user_id %>님 환영합니다!</p>
-            		<a class="btn btn-outline-danger me-2"  href="${pageContext.request.contextPath}/login/Logout.jsp">로그아웃</a>
+            	<form class="d-flex align-items-center">
+            		<p class="mx-2 mb-0"><%=user_id %>님 환영합니다!</p>
+            		<a class="btn btn-outline-danger ms-2"  href="${pageContext.request.contextPath}/login/Logout.jsp">로그아웃</a>
+       		    </form>
             		<%
             	}
                 %>

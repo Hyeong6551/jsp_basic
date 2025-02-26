@@ -12,8 +12,8 @@
 	String goods_no = request.getParameter("goods_no");
 	int goods_quantity = Integer.parseInt(request.getParameter("goods_quantity"));
 	
-	String sql2 = "insert into cart (cart_user_no, cart_goods_no, cart_goods_quantity) "+
-	"values(?,?,?) ON DUPLICATE KEY update cart_goods_quantity = cart_goods_quantity + VALUES(cart_goods_quantity)";
+	String sql2 = "INSERT INTO cart (cart_user_id, cart_goods_no, cart_goods_quantity) "+
+			"VALUES (?, ?, ?) ON DUPLICATE KEY UPDATE cart_goods_quantity = cart_goods_quantity + VALUES(cart_goods_quantity)";
 
 	try{
 		pstmt = conn.prepareStatement(sql2);

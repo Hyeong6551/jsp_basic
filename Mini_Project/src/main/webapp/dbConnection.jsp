@@ -2,7 +2,7 @@
 <%
 	Connection conn = null;
 	
-	String url = "jdbc:mysql://localhost:3306/spring5fs";
+	String url = "jdbc:mysql://localhost:3306/spring5fs?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC";
 	String db_name = "root";
 	String db_password = "1234"; 
 	

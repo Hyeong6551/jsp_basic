@@ -11,7 +11,7 @@
 <body>
 	<jsp:include page="../Header.jsp"/>
 	<form action="LoginForm_Process.jsp" method="post">
-		<div class="register-container my-4">
+		<div class="register-container my-5 py3">
 			<div class="mb-3 mt-3">
 			  <label for="id" class="form-label">아이디</label>
 			  <input type="text" class="form-control" name="user_id">
@@ -20,7 +20,7 @@
 			  <label for="pwd" class="form-label">비밀번호</label>
 			  <input type="password" class="form-control" name="user_password">
 			</div>
-			<div class="d-flex">
+			<div class="d-flex" id="login">
 			<button type="submit" class="btn btn-primary">로그인</button>
 			</div>
 		</div>

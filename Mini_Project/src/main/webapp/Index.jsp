@@ -1,8 +1,9 @@
+<%@page import="com.company.dto.GoodsDto"%>
+<%@page import="com.company.dao.GoodsDao"%>
 <%@page import="java.text.DecimalFormat"%>
 <%@ page import="java.sql.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<jsp:include page="dbConnection.jsp" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,29 +23,19 @@
 <%
 	DecimalFormat df = new DecimalFormat("###,###");
 
-	Connection conn = (Connection)session.getAttribute("conn");
-	PreparedStatement pstmt = null; ResultSet rs = null;
-	String sql = "SELECT * FROM goods";
-	try {		
-		pstmt = conn.prepareStatement(sql);
-		rs = pstmt.executeQuery();
-		while(rs.next()){
+	GoodsDao dao = new GoodsDao();
+	dao.dbConnection();
+	for(GoodsDto dto : dao.selectAll()){
+
 %>
 		<div class="col-3">
-			<a href="goods/Goods.jsp?goods_no=<%=rs.getInt("goods_no") %>">
-				<img src="<%=rs.getString("goods_image") %>">
-				<h6> <%=rs.getString("goods_name") %></h6>	
-				<p><%=df.format(rs.getInt("goods_price")) %> ₩</p>
+			<a href="goods/Goods.jsp?goods_no=<%=dto.getGoods_no() %>">
+				<img src="<%=dto.getGoods_image() %>">
+				<h6> <%=dto.getGoods_name() %></h6>	
+				<p><%=df.format(dto.getGoods_price()) %>원</p>
 			</a>
 		</div>
 <%	
-		}
-	} catch (Exception e){
-		e.printStackTrace();
-	} finally {
-		try { if (rs != null) { rs.close(); } } catch (Exception e) { e.printStackTrace(); }
-		try { if (pstmt != null) { pstmt.close(); } } catch (Exception e) { e.printStackTrace(); }
-		try { if (conn != null) { conn.close(); } } catch (Exception e) { e.printStackTrace(); }
 	}
 %>
 				</div>

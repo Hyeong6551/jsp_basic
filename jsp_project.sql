@@ -1,5 +1,5 @@
 CREATE TABLE `cart` (
-  `cart_no` integer PRIMARY KEY,
+  `cart_no` integer auto_increment PRIMARY KEY,
   `cart_user_no` varchar(30),
   `cart_goods_no` varchar(150),
   `cart_goods_quantity` integer
@@ -15,7 +15,7 @@ CREATE TABLE `users` (
 );
 
 CREATE TABLE `goods` (
-  `goods_no` integer PRIMARY KEY,
+  `goods_no` integer auto_increment PRIMARY KEY,
   `goods_image` varchar(50),
   `goods_name` varchar(150),
   `goods_price` integer,
@@ -23,7 +23,7 @@ CREATE TABLE `goods` (
 );
 
 CREATE TABLE `order` (
-  `order_no` integer PRIMARY KEY,
+  `order_no` integer auto_increment PRIMARY KEY,
   `order_user_id` integer,
   `order_goods_no` integer,
   `order_date` TIMESTAMP DEFAULT NOW()

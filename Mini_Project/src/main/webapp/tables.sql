@@ -8,17 +8,24 @@ CREATE TABLE `goods` (
 
 CREATE TABLE `cart` (
   `cart_no` INT AUTO_INCREMENT PRIMARY KEY,
-  `cart_user_no` varchar(30) NOT NULL,
+  `cart_user_id` varchar(30) NOT NULL,
   `cart_goods_no` varchar(150) NOT NULL,
   `cart_goods_quantity` integer NOT NULL,
-  UNIQUE(cart_user_no, cart_goods_no)
+  UNIQUE(cart_user_id, cart_goods_no)
 );
 
 CREATE TABLE `users` (
   `user_id` varchar(30) PRIMARY KEY,
-  `user_name` varchar(20),
+  `user_name` varchar(50),
   `user_password` varchar(50),
   `user_address` varchar(200),
-  `user_postcode` integer,
+  `user_postcode` varchar(5),
   `user_date`TIMESTAMP DEFAULT NOW()
+);
+
+CREATE TABLE `orderlist` (
+  `order_no` integer auto_increment PRIMARY KEY,
+  `order_user_id` varchar(30),
+  `order_goods_no` integer,
+  `order_date` TIMESTAMP DEFAULT NOW()
 );

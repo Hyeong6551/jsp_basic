@@ -6,7 +6,7 @@
 <%
 String goods_no = request.getParameter("goods_no");
 if (goods_no == null || goods_no.trim().equals("")) {
-    response.sendRedirect("fileList.jsp");
+    response.sendRedirect("GoodsList.jsp");
     return;
 }
 String uploadPath = "image/"; 
