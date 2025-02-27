@@ -1,39 +1,43 @@
+<%@page import="com.company.dao.UsersDao"%>
+<%@page import="com.company.dto.UsersDto"%>
 <%@page import="java.sql.*"%>
-<jsp:include page="../dbConnection.jsp" />
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%
-	PreparedStatement pstmt = null; ResultSet rs = null;
-	
-	Connection conn = (Connection)session.getAttribute("conn");
-	String sql = "SELECT * FROM users where user_id=?";
-	
 	String user_id = request.getParameter("user_id");
 	String user_password = request.getParameter("user_password");
+
+	UsersDao udao = new UsersDao();
+	UsersDto users = udao.selectUser(user_id);	
 	
 	// 아이디 비밀번호 체크
-	String id_check=""; 
-	String password_check="";
-
-	try{
-		pstmt = conn.prepareStatement(sql);
-		pstmt.setString(1, user_id);
-		rs = pstmt.executeQuery();
-		if(rs.next()){
-			id_check = rs.getString("user_id");
-			password_check = rs.getString("user_password");
-		}
-		
-		if(id_check.equals(user_id) && password_check.equals(user_password)){
+	if(users == null){
+		%>
+        <script>
+            alert("존재하지 않는 아이디입니다.");
+            history.back();
+        </script>
+<%
+	} else {
+		String id_check=users.getUser_id(); 
+		String password_check=users.getUser_password();
+	
+		if(user_password.equals(password_check)){
 			session.setAttribute("user_id", user_id);
 			session.setAttribute("user_password", user_password);
-			response.sendRedirect("../Index.jsp");
+%>
+	        <script>
+	            location.href = "../Index.jsp";
+	        </script>
+<%
 		} else {
-			response.sendRedirect("LoginForm.jsp");
+%>
+	        <script>
+	            alert("비밀번호가 일치하지 않습니다.");
+	            location.href = "LoginForm.jsp";
+	        </script>
+<%
 		}
-	}catch (Exception e){
-		e.printStackTrace();
-	}finally{
-		try { if (rs != null) { rs.close(); } } catch (Exception e) { e.printStackTrace(); }
-		try { if (pstmt != null) { pstmt.close(); } } catch (Exception e) { e.printStackTrace(); }
-		try { if (conn != null) { conn.close(); } } catch (Exception e) { e.printStackTrace(); }
 	}
+
 %>

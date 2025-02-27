@@ -1,14 +1,20 @@
+<%@page import="java.sql.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../login/LoginCheck.jsp" %>
+<jsp:include page="../dbConnection.jsp" />
 <%
-
+	Connection conn = (Connection)session.getAttribute("conn");
+	String sql = "select * from orderlist ol, goods g where ol.order_goods_no = g.goods_no";
+	
+	PreparedStatement pstmt = null;	ResultSet rs = null;
+	
 %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title><%=loginCheck %> 장바구니 목록</title>
+<title><%=loginCheck %> 주문 목록</title>
 </head>
 <body>
 <jsp:include page="../Header.jsp"/>
@@ -34,18 +40,10 @@
               </div>
               <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
                <p class="lead fw-normal mb-2">개수</p>
-                <button class="btn btn-link px-2"
-                  onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
-                  <i class="fas fa-minus"></i>
-                </button>
 
                 <input id="form1" min="0" name="quantity" value="2" type="number"
                   class="form-control form-control-sm" />
 
-                <button class="btn btn-link px-2"
-                  onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
-                  <i class="fas fa-plus"></i>
-                </button>
               </div>
               <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
                 <h5 class="mb-0">$499.00</h5>

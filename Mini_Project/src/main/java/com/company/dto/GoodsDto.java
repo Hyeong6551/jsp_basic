@@ -21,4 +21,5 @@ public class GoodsDto {
 		this.goods_price = goods_price;
 		this.goods_content = goods_content;
 	}
+	public GoodsDto() {  }
 }

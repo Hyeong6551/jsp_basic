@@ -1,3 +1,6 @@
+<%@page import="java.text.DecimalFormat"%>
+<%@page import="com.company.dto.GoodsDto"%>
+<%@page import="com.company.dao.GoodsDao"%>
 <%@page import="java.sql.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -12,12 +15,11 @@
 		<%
 	}
 %>
-<jsp:include page="../dbConnection.jsp" /> 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>상품 관리 페이지</title>
 <style>
 table {
     width: 100%;
@@ -52,32 +54,22 @@ function deleteGoods(goods_no) {
            <th>설명</th>
            <th>삭제</th>
        </tr>
-	<%
-	Connection conn = (Connection)session.getAttribute("conn");
-	PreparedStatement pstmt = null; ResultSet rs = null;
-	String sql = "SELECT * FROM goods";
-	try {		
-		pstmt = conn.prepareStatement(sql);
-		rs = pstmt.executeQuery();
-		while(rs.next()){
+<%
+	DecimalFormat df = new DecimalFormat("###,###");
+
+	GoodsDao gdao = new GoodsDao();
+	for(GoodsDto goods : gdao.selectAll()){
 %>
 		<tr>
-			<td><%=rs.getString("goods_no") %></td>	
-			<td><%=rs.getString("goods_name") %></td>	
-			<td><%=rs.getInt("goods_price") %></td>
-			<td><%=rs.getString("goods_content") %></td>
+			<td><%=goods.getGoods_no() %></td>	
+			<td><%=goods.getGoods_name() %></td>	
+			<td><%=df.format(goods.getGoods_price()) %> 원</td>
+			<td><%=goods.getGoods_content()%></td>
             <td>
-                <a href="#" onclick="deleteGoods('<%=rs.getString("goods_no")%>')">삭제</a>
+                <a href="#" onclick="deleteGoods('<%=goods.getGoods_no() %>')">삭제</a>
             </td>
 		</tr>
 <%	
-		}
-	} catch (Exception e){
-		e.printStackTrace();
-	} finally {
-		try { if (rs != null) { rs.close(); } } catch (Exception e) { e.printStackTrace(); }
-		try { if (pstmt != null) { pstmt.close(); } } catch (Exception e) { e.printStackTrace(); }
-		try { if (conn != null) { conn.close(); } } catch (Exception e) { e.printStackTrace(); }
 	}
 %>
 	</table>

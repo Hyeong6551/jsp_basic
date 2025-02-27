@@ -18,7 +18,7 @@
 	
 	function order(id){
 		if(confirm("주문하시겠습니까?")){
-			location.href = 'Order_Process.jsp?order_id=' + id;
+			location.href = '../order/Order_Process.jsp?order_id=' + id;
 		}
 	}
 </script>

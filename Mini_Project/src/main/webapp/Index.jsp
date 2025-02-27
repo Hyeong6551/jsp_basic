@@ -23,16 +23,15 @@
 <%
 	DecimalFormat df = new DecimalFormat("###,###");
 
-	GoodsDao dao = new GoodsDao();
-	dao.dbConnection();
-	for(GoodsDto dto : dao.selectAll()){
+	GoodsDao gdao = new GoodsDao();
+	for(GoodsDto goods : gdao.selectAll()){
 
 %>
 		<div class="col-3">
-			<a href="goods/Goods.jsp?goods_no=<%=dto.getGoods_no() %>">
-				<img src="<%=dto.getGoods_image() %>">
-				<h6> <%=dto.getGoods_name() %></h6>	
-				<p><%=df.format(dto.getGoods_price()) %>원</p>
+			<a href="goods/Goods.jsp?goods_no=<%=goods.getGoods_no() %>">
+				<img src="<%=goods.getGoods_image() %>">
+				<h6><%=goods.getGoods_name() %></h6>	
+				<p><%=df.format(goods.getGoods_price()) %>원</p>
 			</a>
 		</div>
 <%	

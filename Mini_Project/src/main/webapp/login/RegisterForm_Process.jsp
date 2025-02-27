@@ -1,7 +1,8 @@
+<%@page import="com.company.dao.UsersDao"%>
+<%@page import="com.company.dto.UsersDto"%>
 <%@ page import="java.sql.*" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<jsp:include page="../dbConnection.jsp" />
 <%  
 	// 한글깨짐 방지
 	request.setCharacterEncoding("UTF-8");
@@ -16,29 +17,24 @@
 	
 	user_address = user_address + " " + detailAddress;
 	
-	Connection conn = (Connection)session.getAttribute("conn");		
-	PreparedStatement pstmt = null;
+	UsersDto users = new UsersDto();
+	users.setUser_name(user_name);
+	users.setUser_id(user_id);
+	users.setUser_password(user_password);
+	users.setUser_address(user_address);
+	users.setUser_postcode(user_postcode);
 	
-	String sql = "insert into users (user_name, user_id, user_password, user_address,user_postcode) "+
-			"values(?,?,?,?,?);";
-			
-	if(user_name != null && user_id != null && user_password !=null && user_address != null){
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, user_name);
-			pstmt.setString(2, user_id);
-			pstmt.setString(3, user_password);
-			pstmt.setString(4, user_address);
-			pstmt.setString(5, user_postcode);
-			pstmt.executeUpdate();
-			response.sendRedirect("RegisterForm_Result.jsp");
-		} catch (Exception e){
-			e.printStackTrace();
-		} finally {
-			try{ if(pstmt != null){ pstmt.close();} }catch(Exception e){e.printStackTrace();}
-			try{ if(conn != null){ conn.close();} }catch(Exception e){e.printStackTrace();}
-		}
-	} else {
-		response.sendRedirect("RegisterForm.jsp");
+	UsersDao dao = new UsersDao();
+	boolean success = dao.insertUser(users);
+	
+	if(success){
+		response.sendRedirect("RegisterForm_Result.jsp");
+	} else{
+		%>
+		    <script>
+		        alert("가입 실패");
+		        history.back();
+		    </script>
+		<%
 	}
 %>

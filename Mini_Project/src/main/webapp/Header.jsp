@@ -38,7 +38,7 @@
             	} else {
             		%>
             	<form class="d-flex align-items-center">
-            		<p class="mx-2 mb-0"><%=user_id %>님 환영합니다!</p>
+            		<p class="mx-2 mb-0"><a href="${pageContext.request.contextPath}/users/UserForm.jsp"><%=user_id %></a>님 환영합니다!</p>
             		<a class="btn btn-outline-danger ms-2"  href="${pageContext.request.contextPath}/login/Logout.jsp">로그아웃</a>
        		    </form>
             		<%

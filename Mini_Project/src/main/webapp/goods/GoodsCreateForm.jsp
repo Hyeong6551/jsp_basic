@@ -43,7 +43,7 @@
 			</div>
 			<div class="mb-3">
 				<label for="file" class="form-label">파일 업로드</label>
-				<input type="file" class="form-control" name="uploadFile" />
+				<input type="file" class="form-control" name="goods_uploadFile" />
 			</div>
 			<button type="submit" class="btn btn-primary mt-5">상품추가</button>
 		</div>

@@ -19,6 +19,7 @@ public class GoodsDao {
 	private PreparedStatement pstmt;
 	private ResultSet rs;
 	
+	// db 연결
 	public void dbConnection() {
 		try {
 			Class.forName(DRIVER);
@@ -28,7 +29,43 @@ public class GoodsDao {
 		}
 	}
 	
+	// db 연결 끊기
+	public void dbDisconnection() {
+		try {
+            if(rs != null) rs.close();
+            if(pstmt != null) pstmt.close();
+            if(conn != null) conn.close();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	// 상품 생성 (Create)
+	public boolean insertGoods(GoodsDto goods) {
+		dbConnection();
+		boolean success = false;
+		try {
+		    String sql = "INSERT INTO goods (goods_no,goods_image, goods_name, goods_price, goods_content)"+
+		            " VALUES (NULL, ?, ?, ?, ?)";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, goods.getGoods_image());
+			pstmt.setString(2, goods.getGoods_name());
+			pstmt.setInt(3, goods.getGoods_price());
+			pstmt.setString(4, goods.getGoods_content());
+			
+			int result = pstmt.executeUpdate();
+			if(result > 0) { success = true; }
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			dbDisconnection();
+		}
+		return success;
+	}
+	
+	// 상품 전체 조회
 	public ArrayList<GoodsDto> selectAll() {
+		dbConnection();
 		ArrayList<GoodsDto> list = new ArrayList<>();
 		try {
 			String sql = "select * from goods";
@@ -43,27 +80,53 @@ public class GoodsDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			if(rs != null) { try { rs.close(); } catch (SQLException e) { e.printStackTrace(); } }
-			if(pstmt != null) { try { pstmt.close(); } catch (SQLException e) { e.printStackTrace(); } }
-			if(conn != null) { try { conn.close(); } catch (SQLException e) { e.printStackTrace(); } }
+			dbDisconnection();
 		}
 		return list;
 	}
 	
-//	public ArrayList<GoodsDto> selectGoods(int goods_no) {
-//		ArrayList<GoodsDto> list = new ArrayList<>();
-//		try {
-//			String sql = "select * from goods where goods_no=?";
-//			pstmt = conn.prepareStatement(sql);
-//			pstmt.setInt(1, goods_no);
-//			rs = pstmt.executeQuery();
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		} finally {
-//			if(rs != null) { try { rs.close(); } catch (SQLException e) { e.printStackTrace(); } }
-//			if(pstmt != null) { try { pstmt.close(); } catch (SQLException e) { e.printStackTrace(); } }
-//			if(conn != null) { try { conn.close(); } catch (SQLException e) { e.printStackTrace(); } }
-//		}
-//		return list;
-//	}
+	// 상품 개별 조회 (Read)
+	public GoodsDto selectGoods(int goods_no) {
+		dbConnection();
+		GoodsDto goods = null;
+		try {
+			String sql = "select * from goods where goods_no=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, goods_no);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				goods = new GoodsDto();
+				goods.setGoods_no(rs.getInt("goods_no"));
+				goods.setGoods_image(rs.getString("goods_image"));
+				goods.setGoods_name(rs.getString("goods_name"));
+				goods.setGoods_price(rs.getInt("goods_price"));
+				goods.setGoods_content(rs.getString("goods_content"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			dbDisconnection();
+		}
+		return goods;
+	}
+	
+	// 상품 삭제 (Delete)
+	public boolean deleteGoods(int goods_no) {
+		dbConnection();
+		boolean success = false;
+		try {
+			String sql = "DELETE FROM goods WHERE goods_no=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, goods_no);
+			
+			int result = pstmt.executeUpdate();
+			if(result > 0) {success = true;}
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			dbDisconnection();
+		}
+		return success;
+	}
 }
