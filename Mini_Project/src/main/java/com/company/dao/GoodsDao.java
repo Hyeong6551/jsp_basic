@@ -1,53 +1,27 @@
 package com.company.dao;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import com.company.db.dbConnector;
 import com.company.dto.GoodsDto;
 
 public class GoodsDao {
-	private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
-	private static final String URL = "jdbc:mysql://localhost:3306/spring5fs?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul";
-	private static final String USER = "root";
-	private static final String PASS = "1234";
+	private dbConnector db = new dbConnector();
 	
-	private Connection conn;
-	private PreparedStatement pstmt;
-	private ResultSet rs;
-	
-	// db 연결
-	public void dbConnection() {
-		try {
-			Class.forName(DRIVER);
-			conn = DriverManager.getConnection(URL,USER,PASS);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	
-	// db 연결 끊기
-	public void dbDisconnection() {
-		try {
-            if(rs != null) rs.close();
-            if(pstmt != null) pstmt.close();
-            if(conn != null) conn.close();
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
-	}
+	private PreparedStatement pstmt = null;
+	private ResultSet rs = null;
 	
 	// 상품 생성 (Create)
 	public boolean insertGoods(GoodsDto goods) {
-		dbConnection();
+		db.dbConnection();
 		boolean success = false;
 		try {
 		    String sql = "INSERT INTO goods (goods_no,goods_image, goods_name, goods_price, goods_content)"+
 		            " VALUES (NULL, ?, ?, ?, ?)";
-			pstmt = conn.prepareStatement(sql);
+			pstmt = db.getConn().prepareStatement(sql);
 			pstmt.setString(1, goods.getGoods_image());
 			pstmt.setString(2, goods.getGoods_name());
 			pstmt.setInt(3, goods.getGoods_price());
@@ -58,18 +32,18 @@ public class GoodsDao {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			dbDisconnection();
+			db.dbDisconnection();
 		}
 		return success;
 	}
 	
 	// 상품 전체 조회
 	public ArrayList<GoodsDto> selectAll() {
-		dbConnection();
+		db.dbConnection();
 		ArrayList<GoodsDto> list = new ArrayList<>();
 		try {
 			String sql = "select * from goods";
-			pstmt = conn.prepareStatement(sql);
+			pstmt = db.getConn().prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				GoodsDto dto = new GoodsDto(
@@ -80,18 +54,18 @@ public class GoodsDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			dbDisconnection();
+			db.dbDisconnection();
 		}
 		return list;
 	}
 	
 	// 상품 개별 조회 (Read)
 	public GoodsDto selectGoods(int goods_no) {
-		dbConnection();
+		db.dbConnection();
 		GoodsDto goods = null;
 		try {
 			String sql = "select * from goods where goods_no=?";
-			pstmt = conn.prepareStatement(sql);
+			pstmt = db.getConn().prepareStatement(sql);
 			pstmt.setInt(1, goods_no);
 			rs = pstmt.executeQuery();
 			
@@ -106,18 +80,18 @@ public class GoodsDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			dbDisconnection();
+			db.dbDisconnection();
 		}
 		return goods;
 	}
 	
 	// 상품 삭제 (Delete)
 	public boolean deleteGoods(int goods_no) {
-		dbConnection();
+		db.dbConnection();
 		boolean success = false;
 		try {
 			String sql = "DELETE FROM goods WHERE goods_no=?";
-			pstmt = conn.prepareStatement(sql);
+			pstmt = db.getConn().prepareStatement(sql);
 			pstmt.setInt(1, goods_no);
 			
 			int result = pstmt.executeUpdate();
@@ -125,7 +99,7 @@ public class GoodsDao {
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
-			dbDisconnection();
+			db.dbDisconnection();
 		}
 		return success;
 	}

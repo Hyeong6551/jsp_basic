@@ -1,22 +1,27 @@
+<%@page import="com.company.dao.CartOrderDao"%>
 <%@page import="java.sql.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<jsp:include page="../dbConnection.jsp" />
 <%
 	int cart_no = Integer.parseInt(request.getParameter("cart_no")); 
-	Connection conn = (Connection)session.getAttribute("conn");
-	PreparedStatement pstmt = null;
 	
-	try { 
-	    String sql = "delete from cart where cart_no=?";
-	    pstmt = conn.prepareStatement(sql);
-	    pstmt.setInt(1, cart_no);
-	    pstmt.executeUpdate();
-	} catch(Exception e) {
-	    out.println("오류 발생: " + e.getMessage());
-	} finally {
-	    if(pstmt != null) try { pstmt.close(); } catch(Exception e) {}
-	    if(conn != null) try { conn.close(); } catch(Exception e) {}
-		response.sendRedirect("CartForm.jsp");
+	CartOrderDao cdao = new CartOrderDao();
+	boolean success = cdao.deleteCart(cart_no);
+	
+	if(success){
+		%>
+		<script>
+			alert("삭제를 완료하셨습니다");
+			// history.back(-1); 뒤로가기 기능이므로 삭제가 된것이 화면에 반영이 되지않음
+			location.href = "CartForm.jsp";
+		</script>
+		<%
+	} else {
+		%>
+		<script>
+			alert("삭제 실패");
+			location.href = "CartForm.jsp";
+		</script>
+		<%
 	}
 %>

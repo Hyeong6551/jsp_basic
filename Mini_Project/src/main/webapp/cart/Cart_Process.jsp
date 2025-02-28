@@ -1,4 +1,4 @@
-<%@page import="com.company.dao.CartDao"%>
+<%@page import="com.company.dao.CartOrderDao"%>
 <%@page import="com.company.dto.CartDto"%>
 <%@page import="java.util.*"%>
 <%@ page import="java.sql.*" %>
@@ -14,7 +14,7 @@
 	cart.setCart_goods_no(cart_goods_no);
 	cart.setCart_goods_quantity(cart_goods_quantity);
 	
-	CartDao cdao = new CartDao();
+	CartOrderDao cdao = new CartOrderDao();
 	boolean success = cdao.insertCart(cart);
 	
     if(success) {

@@ -1,11 +1,11 @@
 package com.company.dto;
 
 public class GoodsDto {
-	int goods_no;
-	String goods_image;
-	String goods_name;
-	int goods_price;
-	String goods_content;
+	private int goods_no;
+	private String goods_image;
+	private String goods_name;
+	private int goods_price;
+	private String goods_content;
 	
 	public int getGoods_no() { return goods_no; } public void setGoods_no(int goods_no) { this.goods_no = goods_no; }
 	public String getGoods_image() { return goods_image; } public void setGoods_image(String goods_image) { this.goods_image = goods_image; }
@@ -21,5 +21,13 @@ public class GoodsDto {
 		this.goods_price = goods_price;
 		this.goods_content = goods_content;
 	}
+	
+	public GoodsDto(String goods_image, String goods_name, int goods_price) {
+		super();
+		this.goods_image = goods_image;
+		this.goods_name = goods_name;
+		this.goods_price = goods_price;
+	}
+	
 	public GoodsDto() {  }
 }
