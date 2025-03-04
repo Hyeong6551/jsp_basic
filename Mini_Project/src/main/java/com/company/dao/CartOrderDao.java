@@ -40,17 +40,17 @@ public class CartOrderDao {
 	}
 	
 	// 장바구니에서 꺼내온 상품 번호를 주문록목에 넗기 - 2. line 151
-	public boolean insertOrder(String order_id, ArrayList<Integer> cart_no) {
+	public boolean insertOrder(String order_id, ArrayList<CartDto> cartlist) {
 		db.dbConnection();
 		boolean success = false;
-		Iterator<Integer> iter = cart_no.iterator();
-		while(iter.hasNext()) {
+        for (CartDto cart : cartlist) {
 			try {
-			 	String sql = "INSERT INTO orderlist (order_user_id, order_goods_no, order_date) "+
-						  "VALUES(?,?,now())";
+			 	String sql = "INSERT INTO orderlist (order_user_id, order_goods_no, order_quantity,order_date) "+
+						  "VALUES(?,?,?,now())";
 				pstmt = db.getConn().prepareStatement(sql);
 				pstmt.setString(1, order_id);
-				pstmt.setInt(2, iter.next());
+				pstmt.setInt(2, cart.getCart_goods_no());
+				pstmt.setInt(3, cart.getCart_goods_quantity());	
 				
 				int result = pstmt.executeUpdate();
 				if(result > 0) { success=true; }
@@ -104,7 +104,7 @@ public class CartOrderDao {
 				UsersDto udto = new UsersDto(
 						rs.getString("user_id"),rs.getString("user_name"),rs.getString("user_address"),rs.getString("user_postcode"),gdto);
 				OrderDto odto = new OrderDto(
-						rs.getInt("order_no"),rs.getString("order_user_id"),rs.getInt("order_goods_no"),rs.getInt("order_goods_no"),rs.getString("order_date"),udto);
+						rs.getInt("order_no"),rs.getString("order_user_id"),rs.getInt("order_goods_no"),rs.getInt("order_quantity"),rs.getString("order_date"),udto);
 				list.add(odto);
 			}
 		} catch (SQLException e) {
@@ -132,7 +132,7 @@ public class CartOrderDao {
 				UsersDto udto = new UsersDto(
 						rs.getString("user_id"),rs.getString("user_name"),rs.getString("user_address"),rs.getString("user_postcode"),gdto);
 				order = new OrderDto(
-						rs.getInt("order_no"),rs.getString("order_user_id"),rs.getInt("order_goods_no"),rs.getInt("order_goods_no"),rs.getString("order_date"),udto);
+						rs.getInt("order_no"),rs.getString("order_user_id"),rs.getInt("order_goods_no"),rs.getInt("order_quantity"),rs.getString("order_date"),udto);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -143,16 +143,16 @@ public class CartOrderDao {
 	}
 	
 	// 장바구니에 들어있는 상품 번호 꺼내오기 - 1. line 42
-	public ArrayList<Integer> selectCartNo(String order_id) {
+	public ArrayList<CartDto> selectCartNo(String order_id) {
 		db.dbConnection();
-		ArrayList<Integer> list = new ArrayList<>();
+		ArrayList<CartDto> list = new ArrayList<>();
 		try {
 			String sql = "select c.cart_goods_no, c.cart_goods_quantity from users u, cart c where c.cart_user_id = u.user_id and u.user_id=?";
 			pstmt = db.getConn().prepareStatement(sql);
 			pstmt.setString(1, order_id);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
-				list.add(rs.getInt("cart_goods_no"));
+				list.add(new CartDto(rs.getInt("cart_goods_no"),rs.getInt("cart_goods_quantity")));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

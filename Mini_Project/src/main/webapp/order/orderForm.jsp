@@ -1,3 +1,4 @@
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="com.company.dto.OrderDto"%>
 <%@page import="com.company.dao.CartOrderDao"%>
 <%@page import="java.sql.*"%>
@@ -33,20 +34,21 @@
             <div class="d-flex justify-content-between align-items-center mb-4">
             </div>
 <%
-	int total_price=0;
-	String order_date="";
+	DecimalFormat df = new DecimalFormat("###,###");
 
 	String user_id = (String)session.getAttribute("user_id");
 	String order_id = request.getParameter("order_id"); 
 	int order_no = Integer.parseInt(request.getParameter("order_no")); 
 	CartOrderDao odao = new CartOrderDao();
  	OrderDto order = odao.selectOrder(order_no);
-		int price = order.getUsersDto().getGoodsDto().getGoods_price();
+	
+ 	int price = order.getUsersDto().getGoodsDto().getGoods_price();
+ 	int quantity = order.getOrder_quantity();
 	String goods_name = order.getUsersDto().getGoodsDto().getGoods_name();
 	String goods_image = order.getUsersDto().getGoodsDto().getGoods_image();
 	String address = order.getUsersDto().getUser_address();
 	order_no = order.getOrder_no();
-	order_date = order.getOrder_date();
+	String order_date = order.getOrder_date();
 %>
             <div class="card shadow-0 border mb-4">
               <div class="card-body">
@@ -59,10 +61,10 @@
                     <p class="text-muted mb-0"><%=goods_name %></p>
                   </div>
                   <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
-                    <p class="text-muted mb-0 small">수량 : 1</p>
+                    <p class="text-muted mb-0 small">수량 : <%=quantity %></p>
                   </div>
                   <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
-                    <p class="text-muted mb-0 small"><%=price %> 원</p>
+                    <p class="text-muted mb-0 small"><%=df.format(quantity*price) %> 원</p>
                   </div>
                 </div>
               </div>
@@ -81,7 +83,7 @@
           <div class="card-footer border-0 px-4 py-5"
             style="background-color: #a8729a; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;">
             <h5 class="d-flex align-items-center justify-content-end text-white text-uppercase mb-0">총합
-               : <span class="h2 mb-0 ms-2">1040원</span></h5>
+               : <span class="h2 mb-0 ms-2"><%=df.format(quantity*price) %> 원</span></h5>
           </div>
         </div>
       </div>

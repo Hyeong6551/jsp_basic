@@ -27,5 +27,6 @@ CREATE TABLE `orderlist` (
   `order_no` integer auto_increment PRIMARY KEY,
   `order_user_id` varchar(30),
   `order_goods_no` integer,
+  `order_quantity` integer,
   `order_date` TIMESTAMP DEFAULT NOW()
 );

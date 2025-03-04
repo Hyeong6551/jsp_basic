@@ -22,6 +22,12 @@ public class CartDto {
 		this.goodsDto = goodsDto;
 	}
 	
+	public CartDto(int cart_goods_no, int cart_goods_quantity) {
+		super();
+		this.cart_goods_no = cart_goods_no;
+		this.cart_goods_quantity = cart_goods_quantity;
+	}
+	
 	public CartDto() {
 		super();
 	}

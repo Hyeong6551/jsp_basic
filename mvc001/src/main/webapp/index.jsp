@@ -9,6 +9,7 @@
 </head>
 <body>
 <h3>메뉴</h3><hr>
+	<jsp:include page="result.jsp"/>
 <a href="register.jsp">맴버 등록</a>
 <a href="list.do">맴버 목록</a>
 </body>
