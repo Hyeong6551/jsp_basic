@@ -115,6 +115,33 @@ public class CartOrderDao {
 		return list;
 	}
 	
+	// 주문 상품 개별 조회 (Read)
+	public OrderDto selectOrder(int order_no) {
+		db.dbConnection();
+		OrderDto order = null;
+		try {
+			String sql = "select o.*, u.user_id, u.user_name, u.user_address, "
+					+ "u.user_postcode, g.goods_name, g.goods_image, g.goods_price from orderlist o, users u,goods g where u.user_id= o.order_user_id and g.goods_no=o.order_goods_no and o.order_no=?";
+			pstmt = db.getConn().prepareStatement(sql);
+			pstmt.setInt(1, order_no);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				GoodsDto gdto = new GoodsDto(
+						rs.getString("goods_image"),rs.getString("goods_name"),rs.getInt("goods_price"));
+				UsersDto udto = new UsersDto(
+						rs.getString("user_id"),rs.getString("user_name"),rs.getString("user_address"),rs.getString("user_postcode"),gdto);
+				order = new OrderDto(
+						rs.getInt("order_no"),rs.getString("order_user_id"),rs.getInt("order_goods_no"),rs.getInt("order_goods_no"),rs.getString("order_date"),udto);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			db.dbDisconnection();
+		}
+		return order;
+	}
+	
 	// 장바구니에 들어있는 상품 번호 꺼내오기 - 1. line 42
 	public ArrayList<Integer> selectCartNo(String order_id) {
 		db.dbConnection();

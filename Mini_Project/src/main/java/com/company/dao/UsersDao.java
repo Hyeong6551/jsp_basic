@@ -1,13 +1,10 @@
 package com.company.dao;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.company.db.dbConnector;
-import com.company.dto.GoodsDto;
 import com.company.dto.UsersDto;
 
 public class UsersDao {
