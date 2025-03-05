@@ -17,7 +17,7 @@
 	<div>
 	<jsp:include page="header.jsp" />
 		<%-- Categories --%>
-		<div class="categories my-5">
+		<div class="categories my-5 p-5">
 			<div class="small-container">
 				<div class="row">
 <%

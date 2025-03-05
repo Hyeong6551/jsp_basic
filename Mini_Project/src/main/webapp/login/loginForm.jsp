@@ -17,7 +17,7 @@
 <body>
 	<jsp:include page="../header.jsp"/>
 	<form action="loginForm_Process.jsp" method="post">
-		<div class="register-container my-5 py3">
+		<div class="register-container my-5 py-5">
 			<div class="mb-3 mt-3">
 			  <label for="id" class="form-label">아이디</label>
 			  <input type="text" class="form-control" name="user_id">
